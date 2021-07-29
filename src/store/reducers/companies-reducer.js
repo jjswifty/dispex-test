@@ -1,11 +1,15 @@
+import { managementCompanyService } from './../../services'
+
 const SET_COMPANIES = 'GET_COMPANIES'
 const SET_SELECTED_COMPANY = 'SET_SELECTED_COMPANY'
 const SET_IS_COMPANY_SELECTED = 'SET_IS_COMPANY_SELECTED'
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 let initialState = {
     companies: [],
-    selectedCompany: '',
-    isCompanySelected: false
+    selectedCompany: null,
+    isCompanySelected: false,
+    isFetching: false,
 }
 
 const companiesReducer = (state = initialState, action) => {
@@ -28,11 +32,38 @@ const companiesReducer = (state = initialState, action) => {
                 isCompanySelected: action.isCompanySelected
             }
 
+        case TOGGLE_FETCHING:
+            return {
+                ...state,
+                isFetching: !state.isFetching
+            }
+
         default:
             return state
     }
 }
 
+const toggleFetching = () => ({type: TOGGLE_FETCHING})
 export const setCompanies = companies => ({type: SET_COMPANIES, companies})
+export const setSelectedCompany = selectedCompany => ({type: SET_SELECTED_COMPANY, selectedCompany})
+export const setIsCompanySelected = isCompanySelected => ({type: SET_IS_COMPANY_SELECTED, isCompanySelected})
 
-export default companiesReducer
+export const setCompaniesList = () => async (dispatch) => {
+    dispatch(toggleFetching())
+    try {
+        const companies = await managementCompanyService.getManagementCompanies()
+        dispatch(setCompanies(companies))
+
+    } catch (error) {
+        throw new Error(error)
+    } finally {
+        dispatch(toggleFetching())
+    }
+}
+
+export const setChosenCompany = company => dispatch => {
+    dispatch(setSelectedCompany(Number(company)))
+    dispatch(setIsCompanySelected(true))
+}
+
+export default companiesReducer 
