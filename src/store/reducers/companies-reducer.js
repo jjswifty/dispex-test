@@ -1,8 +1,11 @@
 const SET_COMPANIES = 'GET_COMPANIES'
 const SET_SELECTED_COMPANY = 'SET_SELECTED_COMPANY'
+const SET_IS_COMPANY_SELECTED = 'SET_IS_COMPANY_SELECTED'
 
 let initialState = {
-    companies: []
+    companies: [],
+    selectedCompany: '',
+    isCompanySelected: false
 }
 
 const companiesReducer = (state = initialState, action) => {
@@ -17,6 +20,12 @@ const companiesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedCompany: action.selectedCompany
+            }
+
+        case SET_IS_COMPANY_SELECTED:
+            return {
+                ...state,
+                isCompanySelected: action.isCompanySelected
             }
 
         default:
