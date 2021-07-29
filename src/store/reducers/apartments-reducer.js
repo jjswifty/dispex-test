@@ -1,5 +1,5 @@
-const SET_STREETS = 'GET_COMPANIES',
-    SET_APARTMENTS_ON_CHOSEN_COMPANY = 'SET_APARTMENTS_ON_CHOSEN_COMPANY';
+const SET_STREETS = 'GET_COMPANIES'
+const SET_HOUSES_ON_STREETS = 'SET_HOUSES_ON_STREETS'
 
 let initialState = {
     streets: [],
@@ -19,6 +19,14 @@ let initialState = {
         --------- квартира 4
         ---- Дом 2
         --------- квартира 1
+
+    У пользователя должна быть возможность выбрать квартиру,
+    и получить список жильцов в выбранной квартире,
+    а так-же добавить/удалить жильца в выбранной квартире
+
+    Список жильцов должен быть в виде карточек одинакового размера, расположенных справа-налево, сверху-вниз
+
+    Подгружаем все дома управляющей компании, далее сортируем их по улицам.
 */
 const apartmentsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,15 +37,15 @@ const apartmentsReducer = (state = initialState, action) => {
                 streets: action.streets
             }
 
-        case SET_APARTMENTS_ON_CHOSEN_COMPANY:
+        case SET_HOUSES_ON_STREETS:
             return {
                 ...state,
-                apartments: action.streets
+
             }
 
         default:
             return state
-    } // Пилим пагинацию.
+    } 
 }
 
 //export const setCompanies = companies => ({type: SET_COMPANIES, companies})
