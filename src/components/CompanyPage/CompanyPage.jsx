@@ -30,33 +30,37 @@ export const CompanyPage = props => {
         dispatch(setListOfStreets())
         dispatch(setListOfApartments(selectedCompanyId))
     }, [dispatch, selectedCompanyId])
-
-    const houses = () => {
-        
-        const sortedHouses = []
-
-        const sortHousesWithApartments = () => {
-            const housesId = []
-            apartments.forEach(apartment => {
-                if (!housesId.includes(apartment.houseId)) housesId.push(apartment.houseId)
-            })
-
-            const housesWithApartments = {}
-
-            apartments.forEach(apartment => {
-                const houseId = apartment.houseId
-                //if (housesWithApartments.hasOwnProperty(houseId)) housesWithApartments.houseId
-                housesWithApartments[houseId] = [apartment] 
-            }) 
+    if (apartments) {
+        const houses = () => {
+            console.log('houses work')
+            const sortedHouses = []
+    
+            
+                //const housesId = []
+                //apartments.forEach(apartment => {
+                //    if (!housesId.includes(apartment.houseId)) housesId.push(apartment.houseId)
+                //})
+    
+                const housesWithApartments = {}
+    
+                apartments.forEach(apartment => {
+                    const houseId = apartment.houseId
+                    if (housesWithApartments.hasOwnProperty(houseId)) housesWithApartments[houseId].push(apartment)
+                    else housesWithApartments[houseId] = [apartment]
+                }) 
+                console.log(housesWithApartments, 'houses')
+            
+            //return (
+            //    <div>
+            //        
+            //    </div>
+            //)
+    
         }
-
-        return (
-            <div>
-
-            </div>
-        )
-
+        houses()
     }
+    
+
     // TODO: запилить если нет квартир то показывает что их нет
     return (
         <div className={classes.root}>
