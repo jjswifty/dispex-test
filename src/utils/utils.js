@@ -1,0 +1,3 @@
+const sortHousesToTheStreets = (streets, houses) => {
+    
+}

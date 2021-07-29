@@ -15,7 +15,7 @@ class ManagementCompanyService extends BaseService {
         const { data } = await this.instance.get('/Request/streets', {
             params,
         })
-
+        
         return data
     }
 }

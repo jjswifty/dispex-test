@@ -2,13 +2,13 @@ import { managementCompanyService, apartmentsService } from "../../services"
 
 const SET_STREETS = 'GET_COMPANIES'
 const SET_HOUSES = 'SET_HOUSES'
+const SET_APARTMENTS = 'SET_APARTMENTS'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 let initialState = {
     streets: [],
-    apartmentsOnChosenCompany: [],
     isFetching: false,
-    houses: []
+    apartments: []
 }
 /*
     Пользователь должен выбрать из списка Компанию(Управляющую компанию)
@@ -31,7 +31,6 @@ let initialState = {
 
     Список жильцов должен быть в виде карточек одинакового размера, расположенных справа-налево, сверху-вниз
 
-    NO - Подгружаем все дома управляющей компании, далее сортируем их по улицам.
 */
 const apartmentsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -54,18 +53,25 @@ const apartmentsReducer = (state = initialState, action) => {
                 houses: action.houses
             }
 
+        case SET_APARTMENTS: 
+            return {
+                ...state,
+                apartments: action.apartments
+            }
+
         default:
             return state
     } 
 }
 const toggleFetching = () => ({type: TOGGLE_FETCHING})
 export const setStreets = streets => ({type: SET_STREETS, streets})
-export const setHouses = houses => ({type: SET_HOUSES, houses})
+export const setApartments = apartments => ({type: SET_APARTMENTS, apartments})
 
 export const setListOfStreets = () => async dispatch => {
     dispatch(toggleFetching())
     try {
         const streets = await managementCompanyService.getStreets()
+        
         dispatch(setStreets(streets))
     } catch (error) {
         throw new Error(error)
@@ -74,14 +80,14 @@ export const setListOfStreets = () => async dispatch => {
     }
 }
 
-export const setListOfHouses = companyId => async dispatch => {
+export const setListOfApartments = companyId => async dispatch => {
     dispatch(toggleFetching())
     try {
-        const houses = await apartmentsService.getApartments({
+        const apartments = await apartmentsService.getApartments({
             companyId,
         })
-
-        dispatch(setHouses(houses))
+        
+        dispatch(setApartments(apartments))
     } catch (error) {
         throw new Error(error)
     } finally {

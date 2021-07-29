@@ -7,7 +7,7 @@ class ApartmentsService extends BaseService {
         const { data } = await this.instance.get('/HousingStock', {
             params,
         })
-
+        console.log(data, params, 'from API')
         return data
     }
 }
