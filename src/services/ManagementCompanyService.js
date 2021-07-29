@@ -10,6 +10,14 @@ class ManagementCompanyService extends BaseService {
 
         return data
     }
+
+    getStreets = async (params) => {
+        const { data } = await this.instance.get('/Request/streets', {
+            params,
+        })
+
+        return data
+    }
 }
 
 export default new ManagementCompanyService(new HttpClient(Config.API_URL))

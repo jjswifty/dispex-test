@@ -1,9 +1,14 @@
+import { managementCompanyService, apartmentsService } from "../../services"
+
 const SET_STREETS = 'GET_COMPANIES'
-const SET_HOUSES_ON_STREETS = 'SET_HOUSES_ON_STREETS'
+const SET_HOUSES = 'SET_HOUSES'
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 let initialState = {
     streets: [],
     apartmentsOnChosenCompany: [],
+    isFetching: false,
+    houses: []
 }
 /*
     Пользователь должен выбрать из списка Компанию(Управляющую компанию)
@@ -26,7 +31,7 @@ let initialState = {
 
     Список жильцов должен быть в виде карточек одинакового размера, расположенных справа-налево, сверху-вниз
 
-    Подгружаем все дома управляющей компании, далее сортируем их по улицам.
+    NO - Подгружаем все дома управляющей компании, далее сортируем их по улицам.
 */
 const apartmentsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -37,17 +42,51 @@ const apartmentsReducer = (state = initialState, action) => {
                 streets: action.streets
             }
 
-        case SET_HOUSES_ON_STREETS:
+        case TOGGLE_FETCHING:
             return {
                 ...state,
+                isFetching: !state.isFetching
+            }
 
+        case SET_HOUSES:
+            return {
+                ...state,
+                houses: action.houses
             }
 
         default:
             return state
     } 
 }
+const toggleFetching = () => ({type: TOGGLE_FETCHING})
+export const setStreets = streets => ({type: SET_STREETS, streets})
+export const setHouses = houses => ({type: SET_HOUSES, houses})
 
-//export const setCompanies = companies => ({type: SET_COMPANIES, companies})
+export const setListOfStreets = () => async dispatch => {
+    dispatch(toggleFetching())
+    try {
+        const streets = await managementCompanyService.getStreets()
+        dispatch(setStreets(streets))
+    } catch (error) {
+        throw new Error(error)
+    } finally {
+        dispatch(toggleFetching())        
+    }
+}
+
+export const setListOfHouses = companyId => async dispatch => {
+    dispatch(toggleFetching())
+    try {
+        const houses = await apartmentsService.getApartments({
+            companyId,
+        })
+
+        dispatch(setHouses(houses))
+    } catch (error) {
+        throw new Error(error)
+    } finally {
+        dispatch(toggleFetching())        
+    }
+}
 
 export default apartmentsReducer

@@ -1,29 +1,54 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { setCompaniesList, setChosenCompany } from "../../store/reducers/companies-reducer"
+import {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {setCompaniesList, setChosenCompany} from "../../store/reducers/companies-reducer"
+import {makeStyles} from '@material-ui/core/styles';
+import {FormControl} from "@material-ui/core";
+import {InputLabel} from "@material-ui/core";
+import {Select} from "@material-ui/core";
+import {MenuItem} from "@material-ui/core";
+
+const useStyles = makeStyles({
+    root: {
+        margin: 0,
+        padding: 0,
+        width: '100%',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    formControl: {
+        minWidth: 250,
+    },
+})
 
 export const CompanySelect = props => {
     const dispatch = useDispatch()
+    const classes = useStyles()
+
     const companiesList = useSelector(state => state.companiesReducer.companies)
 
     useEffect(() => {
         dispatch(setCompaniesList())
-    }, [])
+    }, [dispatch])
 
     const optionHandler = id => {
         dispatch(setChosenCompany(id))
     }
 
     return (
-        <div>
-            <select autoFocus onChange={e => optionHandler(e.target.value)}>
-                {
-                    companiesList.map(e => <option value={e.id} key={e.id}>
-                        {e.name}
-                    </option>
-                    )
-                }
-            </select>
+        <div className={classes.root}>
+            <FormControl className={classes.formControl}>
+                <InputLabel>Управляющая компания</InputLabel>
+                <Select onChange={e => optionHandler(e.target.value)} defaultValue="">
+                    {
+                        companiesList && companiesList.map(e => <MenuItem value={e.id} key={e.id}>
+                            {e.name}
+                        </MenuItem>)
+                    }
+                </Select>
+            </FormControl>
+
         </div>
     )
 }
