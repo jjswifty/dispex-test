@@ -30,56 +30,21 @@ export const CompanyPage = props => {
         dispatch(setListOfStreets())
         dispatch(setListOfApartments(selectedCompanyId))
     }, [dispatch, selectedCompanyId])
-    if (apartments) {
-        const houses = () => {
-            console.log('houses work')
-            const sortedHouses = []
-    
-            
-                //const housesId = []
-                //apartments.forEach(apartment => {
-                //    if (!housesId.includes(apartment.houseId)) housesId.push(apartment.houseId)
-                //})
-    
-                const housesWithApartments = {}
-    
-                apartments.forEach(apartment => {
-                    const houseId = apartment.houseId
-                    if (housesWithApartments.hasOwnProperty(houseId)) housesWithApartments[houseId].push(apartment)
-                    else housesWithApartments[houseId] = [apartment]
-                }) 
-                console.log(housesWithApartments, 'houses')
-            
-            //return (
-            //    <div>
-            //        
-            //    </div>
-            //)
-    
-        }
-        houses()
-    }
-    
+
+    if (streets) streets.forEach(street => { // Перебирая все улицы,
+        const apartmentsOnThisStreet = apartments.filter(apartment => (apartment.streetId === street.id)) // получаем квартиры, находящиеся на итерируемой улице.
+        const housesWithApartments = {} // Создаем объект в котором будут храниться дома с квартирами (номер дома: { квартира, квартира, ... })
+        apartmentsOnThisStreet.forEach(apartment => { // Перебирая все квартиры,
+            housesWithApartments[apartment.houseId] = apartment // создаем дом, или добавляем в уже существующую квартиру.
+        })
+        street['houses'] = housesWithApartments // И наконец добавляем дома на улицу.
+    })
 
     // TODO: запилить если нет квартир то показывает что их нет
     return (
         <div className={classes.root}>
             {
-                streets && streets.map(street => <div key={street.id}>
-                    {   
-                        //<div>
-                        //    <Button variant="outlined" className={classes.button}>
-                        //        {street.name}
-                        //    </Button>
-                        //    
-                        //    {
-                        //        apartments.map((apartment, index) => {
-                        //            if (apartment.streetId === street.id) return <div key={index}>{apartment.houseId}</div>
-                        //        })
-                        //    }
-                        //</div>
-                    }
-                </div>)
+                
             }
         </div>
     )

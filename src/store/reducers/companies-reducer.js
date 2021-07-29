@@ -52,6 +52,7 @@ export const setCompaniesList = () => async (dispatch) => {
     dispatch(toggleFetching())
     try {
         const companies = await managementCompanyService.getManagementCompanies()
+        console.log(companies)
         dispatch(setCompanies(companies))
 
     } catch (error) {

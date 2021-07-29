@@ -30,7 +30,7 @@ export const CompanySelect = props => {
 
     useEffect(() => {
         dispatch(setCompaniesList())
-    }, [dispatch])
+    }, [])
 
     const optionHandler = id => {
         dispatch(setChosenCompany(id))
