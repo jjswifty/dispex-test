@@ -32,8 +32,8 @@ export const CompanySelect = props => {
         dispatch(setCompaniesList())
     }, [])
 
-    const optionHandler = id => {
-        dispatch(setChosenCompany(id))
+    const optionHandler = ({ id, name }) => {
+        dispatch(setChosenCompany(id, name))
     }
 
     return (
@@ -42,7 +42,10 @@ export const CompanySelect = props => {
                 <InputLabel>Управляющая компания</InputLabel>
                 <Select onChange={e => optionHandler(e.target.value)} defaultValue="">
                     {
-                        companiesList && companiesList.map(e => <MenuItem value={e.id} key={e.id}>
+                        companiesList && companiesList.map(e => <MenuItem 
+                            value={{id: e.id, name: e.name}} 
+                            key={e.id}
+                            >
                             {e.name}
                         </MenuItem>)
                     }

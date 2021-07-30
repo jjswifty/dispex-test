@@ -1,7 +1,6 @@
 import { managementCompanyService, apartmentsService } from "../../services"
 
 const SET_STREETS = 'GET_COMPANIES'
-const SET_HOUSES = 'SET_HOUSES'
 const SET_APARTMENTS = 'SET_APARTMENTS'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
@@ -45,12 +44,6 @@ const apartmentsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: !state.isFetching
-            }
-
-        case SET_HOUSES:
-            return {
-                ...state,
-                houses: action.houses
             }
 
         case SET_APARTMENTS: 

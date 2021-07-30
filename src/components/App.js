@@ -1,4 +1,3 @@
-import {useEffect} from "react"
 import {useSelector} from "react-redux"
 import {CompanyPage} from "./CompanyPage/CompanyPage"
 import {CompanySelect} from "./CompanySelect/CompanySelect"
@@ -36,7 +35,8 @@ export const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <div className={classes.root}>
-                {isCompanySelected
+                {
+                    isCompanySelected
                     ? <CompanyPage selectedCompany={selectedCompany}/>
                     : <CompanySelect/>
                 }
