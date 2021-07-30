@@ -2,35 +2,16 @@ import { managementCompanyService, apartmentsService } from "../../services"
 
 const SET_STREETS = 'GET_COMPANIES'
 const SET_APARTMENTS = 'SET_APARTMENTS'
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+const SET_APARTMENTS_FETCHING = 'SET_APARTMENTS_FETCHING'
+const SET_STREETS_FETCHING = 'SET_STREETS_FETCHING'
 
 let initialState = {
     streets: [],
-    isFetching: false,
-    apartments: []
+    isApartmentsFetching: false,
+    isStreetsFetching: false,
+    apartments: [],
 }
-/*
-    Пользователь должен выбрать из списка Компанию(Управляющую компанию)
-    и получить список квартир для выбранной Управляющей компании
-    Список квартир должен быть в виде "дерева"
-    с возможностью открыть/закрыть "ветвь"
 
-        Улица 1
-        ---- Дом 1
-        --------- квартира 1
-        --------- квартира 2
-        --------- квартира 3
-        --------- квартира 4
-        ---- Дом 2
-        --------- квартира 1
-
-    У пользователя должна быть возможность выбрать квартиру,
-    и получить список жильцов в выбранной квартире,
-    а так-же добавить/удалить жильца в выбранной квартире
-
-    Список жильцов должен быть в виде карточек одинакового размера, расположенных справа-налево, сверху-вниз
-
-*/
 const apartmentsReducer = (state = initialState, action) => {
     switch (action.type) {
 
@@ -40,28 +21,36 @@ const apartmentsReducer = (state = initialState, action) => {
                 streets: action.streets
             }
 
-        case TOGGLE_FETCHING:
-            return {
-                ...state,
-                isFetching: !state.isFetching
-            }
-
         case SET_APARTMENTS: 
             return {
                 ...state,
                 apartments: action.apartments
             }
 
+        case SET_APARTMENTS_FETCHING:
+            return {
+                ...state,
+                isApartmentsFetching: action.boolean
+            }
+
+        case SET_STREETS_FETCHING:
+            return {
+                ...state,
+                isStreetsFetching: action.boolean
+            }
+
         default:
             return state
     } 
 }
-const toggleFetching = () => ({type: TOGGLE_FETCHING})
+
+const setStreetsFetching = boolean => ({type: SET_STREETS_FETCHING, boolean})
+const setApartmentsFetching = boolean => ({type: SET_STREETS_FETCHING, boolean})
 export const setStreets = streets => ({type: SET_STREETS, streets})
-export const setApartments = apartments => ({type: SET_APARTMENTS, apartments})
+export const setApartments = apartments => ({type: SET_APARTMENTS_FETCHING, apartments})
 
 export const setListOfStreets = () => async dispatch => {
-    dispatch(toggleFetching())
+    dispatch(setStreetsFetching(true))
     try {
         const streets = await managementCompanyService.getStreets()
         
@@ -69,12 +58,12 @@ export const setListOfStreets = () => async dispatch => {
     } catch (error) {
         throw new Error(error)
     } finally {
-        dispatch(toggleFetching())        
+        dispatch(setStreetsFetching(false))        
     }
 }
 
 export const setListOfApartments = companyId => async dispatch => {
-    dispatch(toggleFetching())
+    dispatch(setApartmentsFetching(true))
     try {
         const apartments = await apartmentsService.getApartments({
             companyId,
@@ -84,7 +73,7 @@ export const setListOfApartments = companyId => async dispatch => {
     } catch (error) {
         throw new Error(error)
     } finally {
-        dispatch(toggleFetching())        
+        dispatch(setApartmentsFetching(false))        
     }
 }
 

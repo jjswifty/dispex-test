@@ -2,7 +2,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
+import apartmentsReducer, {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Typography} from '@material-ui/core';
 import {setIsCompanySelected} from '../../store/reducers/companies-reducer';
@@ -23,6 +23,7 @@ export const CompanyPage = props => {
     const dispatch = useDispatch()
     const classes = useStyles()
 
+    const isFetching = useSelector(state => apartmentsReducer.isFetching)
     const selectedCompanyId = props.selectedCompany
     const apartments = useSelector(state => state.apartmentsReducer.apartments)
     const streets = useSelector(state => state.apartmentsReducer.streets)
@@ -57,49 +58,55 @@ export const CompanyPage = props => {
                 Назад к выбору
             </Button>
             <Typography variant="subtitle1">{selectedCompanyName}</Typography>
-            <Typography variant="subtitle2">Дома присутствуют на данных улицах:</Typography>
-            {streets && streets.map(street => {
-                const streetHousesKeys = Object.keys(street.houses)
-                return (streetHousesKeys.length !== 0 && <div key={street.id}>
-                    <Button variant="outlined" className={classes.button}>
-                        {street.name}
-                    </Button>
-                    <div>
-                        {streetHousesKeys.map((key, index) => {
-                            //console.log(street)
-                            return (
-                                <div key>
-                                    <ul>
-                                        {streetHousesKeys.map(houseNumber => <div key={houseNumber}>Дом {houseNumber}</div>)}
-                                        <div>
-                                            {Object
-                                                .values(street.houses)
-                                                .map((apartments, index) => {
-                                                    return Object.values(apartments).map((apartment, index) => <ul>
-                                                        Квартира {index}
-                                                        <ul>
-                                                            {apartment.clients.length > 0 && apartment
-                                                                .clients
-                                                                .map(client => {
-                                                                    console.log(client)
-                                                                    return <li>
-                                                                        {`Жилец ${client.name}, телефон ${client.phone}.`}
-                                                                    </li>
-                                                                })}
-                                                        </ul>
-                                                    </ul>)
-                                                })
-                                            }
-                                        </div>
-                                    </ul>
-                                </div>
-                            )
-                        })
+            <Typography variant="subtitle2">Управляющая компания имеет дома на данных улицах: (сделано что-бы не показывало все дома, много пустых)</Typography>
+            {
+                isFetching ? <div>
+                    {streets && streets.map(street => {
+                    const streetHousesKeys = Object.keys(street.houses)
+                    return (streetHousesKeys.length !== 0 && <div key={street.id}>
+                        <Button variant="outlined" className={classes.button}>
+                            {street.name}
+                        </Button>
+                        <div>
+                        {
+                            streetHousesKeys.map((key, index) => {
+                                //console.log(street)
+                                return (
+                                    <div key>
+                                        <ul>
+                                            {streetHousesKeys.map(houseNumber => <div key={houseNumber}>Дом {houseNumber}</div>)}
+                                            <div>
+                                                {Object
+                                                    .values(street.houses)
+                                                    .map((apartments, index) => {
+                                                        return Object.values(apartments).map((apartment, index) => <ul>
+                                                            Квартира {index + 1}
+                                                            <ul>
+                                                                {apartment.clients.length > 0 && apartment
+                                                                    .clients
+                                                                    .map(client => {
+                                                                        console.log(client)
+                                                                        return <li>
+                                                                            {`Жилец ${client.name}, телефон ${client.phone}.`}
+                                                                        </li>
+                                                                    })}
+                                                            </ul>
+                                                        </ul>)
+                                                    })
+                                                }
+                                            </div>
+                                        </ul>
+                                    </div>
+                                )
+                            })
                         }
-                    </div>
-                </div>)
-            })
-}
+                        </div>
+                    </div>)
+                    })
+                    }
+                </div> : 'загрузка...'
+            }
+            
         </div>
     )
 }
