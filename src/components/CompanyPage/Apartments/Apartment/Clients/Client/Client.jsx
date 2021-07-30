@@ -20,8 +20,8 @@ const useStyles = makeStyles({
 export const Client = props => {
     const classes = useStyles()
     const [clientDeleted, setClientDeleted] = useState(false)
-    const handleDelete = () => {
-        clientService.deleteClient(props.client.bindId)
+    const handleDelete = async () => {
+        await clientService.deleteClient(props.client.bindId)
         setClientDeleted(true)
     }
     return (
@@ -29,7 +29,7 @@ export const Client = props => {
             <div className={classes.card}>
                 <p>{`Жилец ${props.client.name},`}</p>
                 <p>{`телефон ${props.client.phone}`}</p>
-                <button onClick={handleDelete}>удалить жильца</button>
+                <button onClick={handleDelete}>Удалить жильца</button>
             </div>
         </li>
     )

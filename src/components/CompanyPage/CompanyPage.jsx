@@ -29,7 +29,6 @@ export const CompanyPage = props => {
     const selectedCompanyName = useSelector(state => state.companiesReducer.selectedCompanyName)
 
     useEffect(() => {
-        console.log(isStreetsFetched)
         if (!isStreetsFetched) {
             dispatch(setListOfStreets())
         }

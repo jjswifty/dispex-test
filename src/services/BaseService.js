@@ -3,27 +3,14 @@ class BaseService {
         this.instance = httpClient.instance
 
         this.instance.interceptors.request.use(config => {
-            const token = process.env.API_TOKEN
+            const token = process.env.REACT_APP_API_TOKEN
             config.headers["Authorization"] = `Bearer ${token}`
-            
+            console.log(config.headers)
             return config
+        },
+        error => {
+            Promise.reject(error);
         })
-
-        this.instance.interceptors.response.use(
-            (response) => {
-                const error = response.data?.error;
-                if (error) throw new Error(error);
-            
-                return response;
-            },
-            (error) => {
-                const {
-                    response: { status },
-                } = error;
-                
-                return Promise.reject(error);
-            }
-        );
     }
 }
 
