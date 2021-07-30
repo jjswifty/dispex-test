@@ -46,7 +46,7 @@ export const CompanySelect = props => {
                             value={{id: e.id, name: e.name}} 
                             key={e.id}
                             >
-                            {e.name}
+                                {e.name}
                         </MenuItem>)
                     }
                 </Select>

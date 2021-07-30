@@ -10,6 +10,21 @@ class ClientService extends BaseService {
 
         return data
     }
+
+    addClient = async (params) => {
+        const { data } = await this.instance.post('/HousingStock/client', {
+            params,
+        })
+
+        return data
+    }
+
+    deleteClient = async (params) => {
+        console.log(params, 'service')
+        const { data } = await this.instance.delete(`/HousingStock/bind_client/${params}`)
+
+        return data
+    }
 }
 
 export default new ClientService(new HttpClient(Config.API_URL))

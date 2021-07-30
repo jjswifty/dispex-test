@@ -1,13 +1,9 @@
-import TreeItem from '@material-ui/lab/TreeItem';
-import TreeView from '@material-ui/lab/TreeView';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import apartmentsReducer, {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Typography} from '@material-ui/core';
 import {setIsCompanySelected} from '../../store/reducers/companies-reducer';
-import { Houses } from './Houses/Houses';
-import { Apartments } from './Apartments/Apartments';
 import { Streets } from './Streets/Streets';
 
 const useStyles = makeStyles({
@@ -25,9 +21,9 @@ export const CompanyPage = props => {
     const classes = useStyles()
 
     const selectedCompanyId = props.selectedCompany
-    const isStreetsFetching = useSelector(state => apartmentsReducer.isStreetsFetching)
-    const isStreetsFetched = useSelector(state => apartmentsReducer.isStreetsFetched)
-    const isApartmentsFetching = useSelector(state => apartmentsReducer.isApartmentsFetching)
+    const isStreetsFetching = useSelector(state => state.apartmentsReducer.isStreetsFetching)
+    const isStreetsFetched = useSelector(state => state.apartmentsReducer.isStreetsFetched)
+    const isApartmentsFetching = useSelector(state => state.apartmentsReducer.isApartmentsFetching)
     const apartments = useSelector(state => state.apartmentsReducer.apartments)
     const streets = useSelector(state => state.apartmentsReducer.streets)
     const selectedCompanyName = useSelector(state => state.companiesReducer.selectedCompanyName)
@@ -48,29 +44,22 @@ export const CompanyPage = props => {
                 housesWithApartments[apartment.houseId] = {
                     ...housesWithApartments[apartment.houseId],
                     [apartment.addressId]: apartment
-                } // создаем дом, добавляем в него итерируемую квартиру / добавляем в уже существующий.
+                } // создаем дом, добавляем в него итерируемую квартиру / добавляем квартиру в уже существующий дом.
             })
             street['houses'] = housesWithApartments // И наконец добавляем дома на улицу.
         })
-        //if (streets) console.log(streets)
     }
     const handleBackButton = () => dispatch(setIsCompanySelected(false))
     const isFetching = (isApartmentsFetching || isStreetsFetching)
-    //const [isStreetOpened, setIsStreetOpened] = useState(false)
 
     return (
         <div className={classes.root}>
-            <Button variant="contained" color="primary" onClick={handleBackButton}>
+            <Button variant="contained" color="primary" onClick={handleBackButton} disabled={isFetching}>
                 Назад к выбору
             </Button>
             <Typography variant="subtitle1">Управляющая компания {selectedCompanyName}</Typography>
             <Typography variant="subtitle2">{selectedCompanyName} имеет дома на данных улицах: (сделано что-бы не показывало все улицы, много пустых)</Typography>
-            {
-                <div>
-                    <Streets streets={streets}/>
-                </div> 
-            }
-            
+            {isFetching ? <Typography variant="subtitle1">ЗАГРУЗКА...</Typography> : <Streets streets={streets}/>}
         </div>
     )
 }

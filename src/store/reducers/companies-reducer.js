@@ -63,7 +63,6 @@ export const setCompaniesList = () => async (dispatch) => {
         const companies = await managementCompanyService.getManagementCompanies()
         
         dispatch(setCompanies(companies))
-
     } catch (error) {
         throw new Error(error)
     } finally {
