@@ -1,0 +1,1 @@
+export const House = props => <li>Дом {props.houseNumber}</li>
