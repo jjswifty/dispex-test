@@ -7,10 +7,10 @@ export const Apartment = props => {
     const handleOpen = () => {
         setIsOpened(!isOpened)
     }
-    
+
     return (
         <ul>
-            <button onClick={handleOpen}>Квартира {props.index + 1}</button>
+            <button onClick={handleOpen}>Квартира с ID {props.apartment.addressId}</button>
             {isOpened && <Clients apartment={props.apartment}/>}
         </ul>
     )

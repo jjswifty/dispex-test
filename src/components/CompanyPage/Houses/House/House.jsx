@@ -7,7 +7,7 @@ export const House = props => {
     const handleOpen = () => {
         setIsOpened(!isOpened)
     }
-
+    
     return <li>
         <button onClick={handleOpen}>Дом {props.houseNumber}</button>
         {
