@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/dispex-test/static/js/main.5781a912.chunk.js",
-    "main.js.map": "/dispex-test/static/js/main.5781a912.chunk.js.map",
-    "runtime-main.js": "/dispex-test/static/js/runtime-main.daef9041.js",
-    "runtime-main.js.map": "/dispex-test/static/js/runtime-main.daef9041.js.map",
-    "static/js/2.61a0d320.chunk.js": "/dispex-test/static/js/2.61a0d320.chunk.js",
-    "static/js/2.61a0d320.chunk.js.map": "/dispex-test/static/js/2.61a0d320.chunk.js.map",
-    "static/js/3.02b49457.chunk.js": "/dispex-test/static/js/3.02b49457.chunk.js",
-    "static/js/3.02b49457.chunk.js.map": "/dispex-test/static/js/3.02b49457.chunk.js.map",
+    "main.js": "/dispex-test/static/js/main.726f10ca.chunk.js",
+    "main.js.map": "/dispex-test/static/js/main.726f10ca.chunk.js.map",
+    "runtime-main.js": "/dispex-test/static/js/runtime-main.c8f28196.js",
+    "runtime-main.js.map": "/dispex-test/static/js/runtime-main.c8f28196.js.map",
+    "static/js/2.a91f4b52.chunk.js": "/dispex-test/static/js/2.a91f4b52.chunk.js",
+    "static/js/2.a91f4b52.chunk.js.map": "/dispex-test/static/js/2.a91f4b52.chunk.js.map",
+    "static/js/3.7e8f3420.chunk.js": "/dispex-test/static/js/3.7e8f3420.chunk.js",
+    "static/js/3.7e8f3420.chunk.js.map": "/dispex-test/static/js/3.7e8f3420.chunk.js.map",
     "index.html": "/dispex-test/index.html",
-    "static/js/2.61a0d320.chunk.js.LICENSE.txt": "/dispex-test/static/js/2.61a0d320.chunk.js.LICENSE.txt"
+    "static/js/2.a91f4b52.chunk.js.LICENSE.txt": "/dispex-test/static/js/2.a91f4b52.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.daef9041.js",
-    "static/js/2.61a0d320.chunk.js",
-    "static/js/main.5781a912.chunk.js"
+    "static/js/runtime-main.c8f28196.js",
+    "static/js/2.a91f4b52.chunk.js",
+    "static/js/main.726f10ca.chunk.js"
   ]
 }
