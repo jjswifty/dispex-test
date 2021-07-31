@@ -42,7 +42,7 @@ export const Clients = props => {
                                     //addedClients.length > 0 && addedClients.map(client => {
                                     //    return <Client client={client} apartment={props.apartment} key={client.bindId}/>
                                     //})
-                                    <Client client={client} key={index} apartment={props.apartment}/>
+                                    <Client client={client} key={client.bindId} apartment={props.apartment}/>
                                 }
                             </div>
                         })
