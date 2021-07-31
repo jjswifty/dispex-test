@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/dispex/static/js/main.267cba89.chunk.js",
+    "main.js.map": "/dispex/static/js/main.267cba89.chunk.js.map",
+    "runtime-main.js": "/dispex/static/js/runtime-main.b206f735.js",
+    "runtime-main.js.map": "/dispex/static/js/runtime-main.b206f735.js.map",
+    "static/js/2.61a0d320.chunk.js": "/dispex/static/js/2.61a0d320.chunk.js",
+    "static/js/2.61a0d320.chunk.js.map": "/dispex/static/js/2.61a0d320.chunk.js.map",
+    "static/js/3.02b49457.chunk.js": "/dispex/static/js/3.02b49457.chunk.js",
+    "static/js/3.02b49457.chunk.js.map": "/dispex/static/js/3.02b49457.chunk.js.map",
+    "index.html": "/dispex/index.html",
+    "static/js/2.61a0d320.chunk.js.LICENSE.txt": "/dispex/static/js/2.61a0d320.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b206f735.js",
+    "static/js/2.61a0d320.chunk.js",
+    "static/js/main.267cba89.chunk.js"
+  ]
+}
