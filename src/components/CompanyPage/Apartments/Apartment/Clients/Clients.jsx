@@ -30,28 +30,24 @@ export const Clients = props => {
         })
     }
 
-    return (
+    return ( 
         <ul>
             <div className={classes.clients}>
+                Жильцы
                 <div>
                     {
-                        props.apartment.clients.length > 0 && props.apartment.clients.map(client => {
-                            console.log(props.apartment)
+                        props.apartment.clients.length > 0 && props.apartment.clients.map((client, index) => {
                             return <div>
-                                <Client client={client} key={client.id} apartment={props.apartment}/>
-                                <div>
-                                    {
-                                        addedClients.length > 0 && addedClients.map(client => {
-                                            return <Client client={client} apartment={props.apartment} key={client.bindId}/>
-                                        })
-                                    }
-                                </div>
+                                {
+                                    //addedClients.length > 0 && addedClients.map(client => {
+                                    //    return <Client client={client} apartment={props.apartment} key={client.bindId}/>
+                                    //})
+                                    <Client client={client} key={index} apartment={props.apartment}/>
+                                }
                             </div>
                         })
                     }
-                    
                 </div>
-                
             </div>
             <div>
                 

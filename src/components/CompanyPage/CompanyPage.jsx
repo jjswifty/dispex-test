@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import apartmentsReducer, {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
+import {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Typography} from '@material-ui/core';
 import {setIsCompanySelected} from '../../store/reducers/companies-reducer';
