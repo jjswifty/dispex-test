@@ -22,12 +22,12 @@ export const Street = props => {
             {street.name}
         </Button>
         <div>
-            {isStreetOpened && streetHousesKeys.map((key, index) => {
-                return <div key={key}>
+            { 
+                isStreetOpened && <div>
                     <ul>
                         <Houses streetHousesKeys={streetHousesKeys} streetHouses={Object.values(street.houses)}/>
                     </ul>
-                </div>})
+                </div>
             }
         </div>
     </div>)

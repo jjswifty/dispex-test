@@ -32,9 +32,9 @@ export const Clients = props => {
 
     return ( 
         <ul>
-            <div className={classes.clients}>
+            <div >
                 Жильцы
-                <div>
+                <div className={classes.clients}>
                     {
                         props.apartment.clients.length > 0 && props.apartment.clients.map((client, index) => {
                             return <div key={client.bindId}>
