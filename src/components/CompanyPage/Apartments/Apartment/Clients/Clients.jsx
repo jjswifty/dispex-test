@@ -45,7 +45,7 @@ export const Clients = props => {
                 <Typography>Жильцы</Typography>
                 <div className={classes.clients}>
                     {
-                        props.apartment.clients.length > 0 && props.apartment.clients.map((client, index) => {
+                        props.apartment.clients.length > 0 ? props.apartment.clients.map((client, index) => {
                             return <div key={client.bindId}>
                                 {
                                     //addedClients.length > 0 && addedClients.map(client => {
@@ -54,7 +54,7 @@ export const Clients = props => {
                                     <Client client={client} apartment={props.apartment}/>
                                 }
                             </div>
-                        })
+                        }) : <Typography variant="subtitle2">- Жильцов нет</Typography>
                     }
                 </div>
             </div>
