@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core"
 import { useState } from "react"
 import { Clients } from "./Clients/Clients"
 
@@ -10,7 +11,7 @@ export const Apartment = props => {
 
     return (
         <ul>
-            <button onClick={handleOpen}>Квартира с ID {props.apartment.addressId}</button>
+            <Button size="small" variant="outlined" style={{margin: '2px'}} onClick={handleOpen}>Квартира с ID {props.apartment.addressId}</Button>
             {isOpened && <Clients apartment={props.apartment}/>}
         </ul>
     )

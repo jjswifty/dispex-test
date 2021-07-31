@@ -1,5 +1,5 @@
 import { Client } from "./Client/Client"
-import { makeStyles } from "@material-ui/core"
+import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
 import { clientService } from "../../../../../services"
 import { useState } from "react"
 
@@ -9,6 +9,15 @@ const useStyles = makeStyles({
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
+    btn: {
+        fontSize: 12,
+        margin: 5
+    },
+    input: {
+        width: 140,
+        margin: 5
+    },
+
 })
 export const Clients = props => {
     const classes = useStyles()
@@ -33,7 +42,7 @@ export const Clients = props => {
     return ( 
         <ul>
             <div >
-                Жильцы
+                <Typography>Жильцы</Typography>
                 <div className={classes.clients}>
                     {
                         props.apartment.clients.length > 0 && props.apartment.clients.map((client, index) => {
@@ -49,19 +58,18 @@ export const Clients = props => {
                     }
                 </div>
             </div>
-            <div>
-                
+            <div className={classes.inputs}>
+                <TextField className={classes.input} value={name} onInput={e => setName(e.target.value)} placeholder="имя"/>
+                <TextField className={classes.input} onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                            event.preventDefault();
+                        }}
+                    } 
+                    value={phone} 
+                    onInput={e => setPhone(String(e.target.value))} 
+                    placeholder="телефон"/>
+                <Button onClick={addClient} disabled={!name || !phone} className={classes.btn}>Добавить жильца</Button>
             </div>
-            <input value={name} onInput={e => setName(e.target.value)} placeholder="имя"/>
-            <input onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                    }}
-                } 
-                value={phone} 
-                onInput={e => setPhone(String(e.target.value))} 
-                placeholder="телефон"/>
-            <button onClick={addClient} disabled={!name || !phone}>Добавить жильца</button>
         </ul>
     )
 }

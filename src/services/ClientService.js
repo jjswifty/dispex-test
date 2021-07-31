@@ -20,7 +20,6 @@ class ClientService extends BaseService {
     }
 
     deleteClient = async (params) => {
-        console.log(params, 'service')
         const { data } = await this.instance.delete(`/HousingStock/bind_client/${params}`)
 
         return data

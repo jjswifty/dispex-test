@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core"
+import { Button, Card, CardContent, makeStyles, Typography } from "@material-ui/core"
 import { useState } from "react"
 import { clientService } from "../../../../../../services"
 
@@ -12,8 +12,15 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
-        border: '2px solid black',
         margin: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 4
+    },
+    btn: {
+        width: '90%',
+        fontSize: 12,
+        marginTop: 5
     }
 })
 
@@ -26,11 +33,20 @@ export const Client = props => {
     }
     return (
         clientDeleted ? null : <li className={classes.root}>
-            <div className={classes.card}>
-                <p>{`Жилец ${props.client.name},`}</p>
-                <p>{`телефон ${props.client.phone}`}</p>
-                <button onClick={handleDelete}>Удалить жильца</button>
-            </div>
+            {
+                //<div className={classes.card}>
+                //    <Typography variant="inherit">{`Жилец ${props.client.name},`}</Typography>
+                //    <Typography variant="inherit">{`телефон ${props.client.phone}`}</Typography>
+                //    <Button className={classes.btn} onClick={handleDelete} color="secondary" variant="contained">Удалить жильца</Button>
+                //</div>
+            }
+            <Card className={classes.card}>
+                <CardContent>
+                    <Typography variant="inherit">{`Жилец ${props.client.name},`}</Typography>
+                    <Typography variant="inherit">{`телефон ${props.client.phone}`}</Typography>
+                    <Button className={classes.btn} onClick={handleDelete} color="secondary" variant="contained">Удалить жильца</Button>
+                </CardContent>
+            </Card>
         </li>
     )
 }

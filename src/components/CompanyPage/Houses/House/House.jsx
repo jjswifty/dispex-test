@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core"
 import { useState } from "react"
 import { Apartments } from "../../Apartments/Apartments"
 
@@ -9,7 +10,7 @@ export const House = props => {
     }
     
     return <li>
-        <button onClick={handleOpen}>Дом {props.houseNumber}</button>
+        <Button size="medium" variant="outlined" onClick={handleOpen} style={{margin: '2px'}}>Дом {props.houseNumber}</Button>
         {
             isOpened && props.streetHouses.map((apartments, index) => {
                 return <Apartments apartments={Object.values(apartments)} key={index}/>
