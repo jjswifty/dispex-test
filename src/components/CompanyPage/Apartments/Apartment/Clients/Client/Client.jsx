@@ -7,7 +7,7 @@ const useStyles = makeStyles({
         listStyleType: 'none'
     },
     card: {
-        width: 200,
+        width: 250,
         height: 130,
         display: 'flex',
         flexDirection: 'column',
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         margin: 2,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 4
+
     },
     btn: {
         width: '90%',
