@@ -69,13 +69,6 @@ export const setIsStreetsFetched = boolean => ({type: SET_IS_STREETS_FETCHED, bo
 export const setIsApartmetsFetched = boolean => ({type: SET_IS_APARTMENTS_FETCHED, boolean})
 export const setApartments = apartments => ({type: SET_APARTMENTS, apartments})
 
-/*
-    Вообще если поглядеть на санки то для меня они выглядят довольно избыточными.
-    Т.е. перед запросом мы изменяем состояние которое отвечает за статус запроса, 
-    потом еще после запроса мы устанавливаем состояние которое отвечает за то,
-    получены ли данные (чтобы если что не делать запрос еще раз). 
-    
-*/
 
 export const setListOfStreets = () => async dispatch => {
     dispatch(setStreetsFetching(true))

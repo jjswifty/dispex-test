@@ -32,7 +32,7 @@ export const Client = props => {
         setClientDeleted(true)
     }
     return (
-        clientDeleted ? null : <li className={classes.root}
+        !clientDeleted && <li className={classes.root}>
             <Card className={classes.card}>
                 <CardContent>
                     <Typography variant="inherit">{`Жилец ${props.client.name},`}</Typography>
