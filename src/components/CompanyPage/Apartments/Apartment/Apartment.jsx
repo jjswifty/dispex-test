@@ -11,7 +11,7 @@ export const Apartment = props => {
 
     return (
         <ul>
-            <Button size="small" variant="outlined" style={{margin: '2px'}} onClick={handleOpen}>Квартира с ID {props.apartment.addressId}</Button>
+            <Button size="small" variant="outlined" style={{margin: '2px'}} onClick={handleOpen}>Квартира {props.index}</Button>
             {isOpened && <Clients apartment={props.apartment}/>}
         </ul>
     )
