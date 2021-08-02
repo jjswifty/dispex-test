@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setListOfApartments, setListOfStreets} from '../../store/reducers/apartments-reducer';
+import {setListOfApartments} from '../../store/reducers/apartments-reducer';
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Typography} from '@material-ui/core';
 import {setIsCompanySelected} from '../../store/reducers/companies-reducer';
@@ -15,27 +15,24 @@ const useStyles = makeStyles({
 })
 
 export const CompanyPage = props => {
-    // вообще компоненты нужно хорошо, даже очень хорошо зарефакторить, 
-    // но основная масса писалась ночью, так что и код соответствующий
+
     const dispatch = useDispatch()
     const classes = useStyles()
 
-    const selectedCompanyId = props.selectedCompany
-    const isStreetsFetching = useSelector(state => state.apartmentsReducer.isStreetsFetching)
-    const isStreetsFetched = useSelector(state => state.apartmentsReducer.isStreetsFetched)
+    const selectedCompanyId = props.selectedCompanyId
+    
     const isApartmentsFetching = useSelector(state => state.apartmentsReducer.isApartmentsFetching)
+    const isStreetsFetching = useSelector(state => state.apartmentsReducer.isStreetsFetching)
     const apartments = useSelector(state => state.apartmentsReducer.apartments)
     const streets = useSelector(state => state.apartmentsReducer.streets)
     const selectedCompanyName = useSelector(state => state.companiesReducer.selectedCompanyName)
+    const isFetching = (isApartmentsFetching || isStreetsFetching)
 
     useEffect(() => {
-        if (!isStreetsFetched) {
-            dispatch(setListOfStreets())
-        }
         dispatch(setListOfApartments(selectedCompanyId))
-    }, [])
+    }, [dispatch, selectedCompanyId])
 
-    if (streets) {
+    const sortApartmentsToTheStreets = () => {
         streets.forEach(street => { // Перебирая все улицы,
             const apartmentsOnThisStreet = apartments.filter(apartment => (apartment.streetId === street.id)) // получаем квартиры, находящиеся на итерируемой улице.
             const housesWithApartments = {} // Создаем объект в котором будут храниться дома с квартирами (номер дома: { квартира, квартира, ... })
@@ -48,14 +45,14 @@ export const CompanyPage = props => {
             street['houses'] = housesWithApartments // И наконец добавляем дома на улицу.
         })
     }
+
+    if (!isFetching) sortApartmentsToTheStreets() // Оптимизируем затратные вычисления
+    
     const handleBackButton = () => dispatch(setIsCompanySelected(false))
-    const isFetching = (isApartmentsFetching || isStreetsFetching)
 
     return (
         <div className={classes.root}>
-            <Button variant="contained" color="primary" onClick={handleBackButton} disabled={isFetching}>
-                Назад к выбору
-            </Button>
+            <Button variant="contained" color="primary" onClick={handleBackButton} disabled={isFetching}>Назад к выбору</Button>
             <Typography variant="subtitle1">Управляющая компания {selectedCompanyName}</Typography>
             <Typography variant="subtitle2">{selectedCompanyName} имеет дома на данных улицах: (сделано что-бы не показывало все улицы, много пустых)</Typography>
             {isFetching ? <Typography variant="subtitle1">ЗАГРУЗКА...</Typography> : <Streets streets={streets}/>}

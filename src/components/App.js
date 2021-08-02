@@ -1,8 +1,10 @@
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {CompanyPage} from "./CompanyPage/CompanyPage"
 import {CompanySelect} from "./CompanySelect/CompanySelect"
 import {makeStyles, ThemeProvider, createTheme} from '@material-ui/core/styles';
 import { CssBaseline } from "@material-ui/core";
+import { setListOfStreets } from "../store/reducers/apartments-reducer";
+import { useEffect } from "react";
 
 const theme = createTheme({
     palette: {
@@ -27,9 +29,14 @@ const useStyles = makeStyles({
 export const App = () => {
 
     const classes = useStyles()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(setListOfStreets())
+    }, [dispatch])
 
     const isCompanySelected = useSelector(state => state.companiesReducer.isCompanySelected)
-    const selectedCompany = useSelector(state => state.companiesReducer.selectedCompany)
+    const selectedCompanyId = useSelector(state => state.companiesReducer.selectedCompany)
 
     return (
         <ThemeProvider theme={theme}>
@@ -37,7 +44,7 @@ export const App = () => {
             <div className={classes.root}>
                 {
                     isCompanySelected
-                    ? <CompanyPage selectedCompany={selectedCompany}/>
+                    ? <CompanyPage selectedCompanyId={selectedCompanyId}/>
                     : <CompanySelect/>
                 }
             </div>
