@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/dispex-test/static/js/main.06a0366a.chunk.js",
-    "main.js.map": "/dispex-test/static/js/main.06a0366a.chunk.js.map",
+    "main.js": "/dispex-test/static/js/main.43a8b322.chunk.js",
+    "main.js.map": "/dispex-test/static/js/main.43a8b322.chunk.js.map",
     "runtime-main.js": "/dispex-test/static/js/runtime-main.c8f28196.js",
     "runtime-main.js.map": "/dispex-test/static/js/runtime-main.c8f28196.js.map",
-    "static/js/2.a91f4b52.chunk.js": "/dispex-test/static/js/2.a91f4b52.chunk.js",
-    "static/js/2.a91f4b52.chunk.js.map": "/dispex-test/static/js/2.a91f4b52.chunk.js.map",
+    "static/js/2.5f259993.chunk.js": "/dispex-test/static/js/2.5f259993.chunk.js",
+    "static/js/2.5f259993.chunk.js.map": "/dispex-test/static/js/2.5f259993.chunk.js.map",
     "static/js/3.7e8f3420.chunk.js": "/dispex-test/static/js/3.7e8f3420.chunk.js",
     "static/js/3.7e8f3420.chunk.js.map": "/dispex-test/static/js/3.7e8f3420.chunk.js.map",
     "index.html": "/dispex-test/index.html",
-    "static/js/2.a91f4b52.chunk.js.LICENSE.txt": "/dispex-test/static/js/2.a91f4b52.chunk.js.LICENSE.txt"
+    "static/js/2.5f259993.chunk.js.LICENSE.txt": "/dispex-test/static/js/2.5f259993.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c8f28196.js",
-    "static/js/2.a91f4b52.chunk.js",
-    "static/js/main.06a0366a.chunk.js"
+    "static/js/2.5f259993.chunk.js",
+    "static/js/main.43a8b322.chunk.js"
   ]
 }
