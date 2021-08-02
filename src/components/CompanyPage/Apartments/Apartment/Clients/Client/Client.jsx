@@ -32,14 +32,7 @@ export const Client = props => {
         setClientDeleted(true)
     }
     return (
-        clientDeleted ? null : <li className={classes.root}>
-            {
-                //<div className={classes.card}>
-                //    <Typography variant="inherit">{`Жилец ${props.client.name},`}</Typography>
-                //    <Typography variant="inherit">{`телефон ${props.client.phone}`}</Typography>
-                //    <Button className={classes.btn} onClick={handleDelete} color="secondary" variant="contained">Удалить жильца</Button>
-                //</div>
-            }
+        clientDeleted ? null : <li className={classes.root}
             <Card className={classes.card}>
                 <CardContent>
                     <Typography variant="inherit">{`Жилец ${props.client.name},`}</Typography>
